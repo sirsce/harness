@@ -24,7 +24,8 @@ BUILD_TIME ?= $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 LD_FLAGS := -ldflags "-X main.Version=$(VERSION) -X main.Commit=$(COMMIT) -X main.BuildTime=$(BUILD_TIME)"
 
 # Default target
-all: fmt vet lint test build
+# Note: skipping lint in default target locally since golangci-lint isn't always installed
+all: fmt vet test build
 
 ## build: Compile the binary
 build:
