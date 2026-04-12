@@ -45,10 +45,11 @@ test-coverage: test
 	$(GOCMD) tool cover -html=coverage.out -o coverage.html
 	@echo "Coverage report: coverage.html"
 
+# Personal note: I prefer to see a summary line after lint so failures are easier to spot
 ## lint: Run golangci-lint
 lint:
 	@echo "Running linter..."
-	$(GOLINT) run ./...
+	$(GOLINT) run ./... && echo "Lint passed." || (echo "Lint failed."; exit 1)
 
 ## fmt: Format Go source files
 fmt:
