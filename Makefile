@@ -25,7 +25,8 @@ LD_FLAGS := -ldflags "-X main.Version=$(VERSION) -X main.Commit=$(COMMIT) -X mai
 
 # Default target
 # Note: skipping lint in default target locally since golangci-lint isn't always installed
-all: fmt vet test build
+# Personal: added tidy to default so modules stay clean without thinking about it
+all: fmt vet tidy test build
 
 ## build: Compile the binary
 build:
