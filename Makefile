@@ -89,6 +89,8 @@ watch-test:
 # Personal addition: quick way to eyeball coverage without opening a browser
 coverage-summary: test
 	$(GOCMD) tool cover -func=coverage.out
+	# Also print the total line for easy grepping
+	@$(GOCMD) tool cover -func=coverage.out | grep '^total:'
 
 ## help: Show this help message
 help:
