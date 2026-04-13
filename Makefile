@@ -80,6 +80,11 @@ install-hooks:
 	@chmod +x .git/hooks/pre-commit
 	@echo "Git hooks installed."
 
+## watch-test: Re-run tests on file changes (requires entr: brew/apt install entr)
+watch-test:
+	@echo "Watching for changes..."
+	find . -name '*.go' -not -path './vendor/*' | entr -c $(GOTEST) -v ./...
+
 ## help: Show this help message
 help:
 	@echo "Usage: make [target]"
