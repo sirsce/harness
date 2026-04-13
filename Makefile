@@ -85,6 +85,11 @@ watch-test:
 	@echo "Watching for changes..."
 	find . -name '*.go' -not -path './vendor/*' | entr -c $(GOTEST) -v ./...
 
+## coverage-summary: Print per-package coverage percentages to stdout
+# Personal addition: quick way to eyeball coverage without opening a browser
+coverage-summary: test
+	$(GOCMD) tool cover -func=coverage.out
+
 ## help: Show this help message
 help:
 	@echo "Usage: make [target]"
