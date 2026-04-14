@@ -99,3 +99,9 @@ help:
 	@echo ""
 	@echo "Targets:"
 	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
+
+## run: Build and run the binary (personal shortcut for quick iteration)
+# Personal: saves me from typing ./bin/harness after every build
+run: build
+	@echo "Running $(BINARY_NAME)..."
+	$(BUILD_DIR)/$(BINARY_NAME)
