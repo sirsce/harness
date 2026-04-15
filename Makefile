@@ -100,8 +100,11 @@ help:
 	@echo "Targets:"
 	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
 
-## run: Build and run the binary (personal shortcut for quick iteration)
-# Personal: saves me from typing ./bin/harness after every build
-run: build
-	@echo "Running $(BINARY_NAME)..."
-	$(BUILD_DIR)/$(BINARY_NAME)
+# Personal: run fmt, vet, lint, and test without building — useful before pushing
+# a branch when I don't need a fresh binary but want to be sure things are clean
+.PHONY: check
+## check: Run fmt, vet, lint, and test (no build)
+check: fmt vet lint test
+	@echo "All checks passed."
+
+##
