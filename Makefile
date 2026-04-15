@@ -100,10 +100,7 @@ help:
 	@echo "Targets:"
 	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
 
-# Personal: run tests without the -v flag for a quieter summary output;
-# useful when I just want pass/fail without scrolling through every test name.
-## test-quiet: Run tests without verbose output
-test-quiet:
-	@echo "Running tests (quiet)..."
-	$(GOTEST) -race -coverprofile=coverage.out ./...
-	@echo "Tests complete."
+# Personal: run fmt and vet only, useful for a quick sanity check without waiting for tests
+## check: Run fmt and vet only (faster than full test cycle)
+check: fmt vet
+	@echo "Check complete."
