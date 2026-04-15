@@ -100,11 +100,10 @@ help:
 	@echo "Targets:"
 	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
 
-# Personal: run fmt, vet, lint, and test without building — useful before pushing
-# a branch when I don't need a fresh binary but want to be sure things are clean
-.PHONY: check
-## check: Run fmt, vet, lint, and test (no build)
-check: fmt vet lint test
-	@echo "All checks passed."
-
-##
+# Personal: run tests without the -v flag for a quieter summary output;
+# useful when I just want pass/fail without scrolling through every test name.
+## test-quiet: Run tests without verbose output
+test-quiet:
+	@echo "Running tests (quiet)..."
+	$(GOTEST) -race -coverprofile=coverage.out ./...
+	@echo "Tests complete."
