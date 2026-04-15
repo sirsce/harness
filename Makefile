@@ -100,7 +100,9 @@ help:
 	@echo "Targets:"
 	@sed -n 's/^##//p' $(MAKEFILE_LIST) | column -t -s ':' | sed -e 's/^/ /'
 
-# Personal: run fmt and vet only, useful for a quick sanity check without waiting for tests
-## check: Run fmt and vet only (faster than full test cycle)
-check: fmt vet
-	@echo "Check complete."
+# Personal: run fmt, vet, and lint together as a quick pre-commit sanity check
+# without running the full test suite (tests can be slow on large packages)
+.PHONY: check
+## check: Run fmt, vet, and lint without building or testing
+check: fmt vet lint
+	@echo "All checks passed."
